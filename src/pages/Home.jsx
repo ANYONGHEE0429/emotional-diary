@@ -1,20 +1,21 @@
-import React from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useState } from "react";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import DiaryList from "../components/DiaryList";
 
 const Home = () => {
-  const [params, setParams] = useSearchParams();
-  console.log(params.get("value"));
+  const [pivotDate, setPivotDate] = useState(new Date());
 
-  const updateQueryParams = () => {
-    const newParams = new URLSearchParams(params);
-
-    newParams.set("value", "afterValue");
-
-    setParams(newParams);
-  };
   return (
     <div>
-      <button onClick={updateQueryParams}>gg</button>
+      <Header
+        title={`${pivotDate.getFullYear()}년 ${
+          pivotDate.getMonth() + 1
+        }월 ${pivotDate.getDay()}일`}
+        leftChild={<Button text={"<"} />}
+        rightChild={<Button text={">"} />}
+      />
+      <DiaryList />
     </div>
   );
 };
